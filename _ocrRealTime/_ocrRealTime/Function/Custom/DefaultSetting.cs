@@ -26,6 +26,7 @@ namespace _ocrRealTime.Function {
             get { return Properties.Settings.Default.cameraIP; }
             set {
                 Properties.Settings.Default.cameraIP = value;
+                rtsppath = string.Format("rtsp://admin:123456@{0}:43794", value);
                 OnPropertyChanged(nameof(cameraip));
             }
         }
@@ -36,56 +37,21 @@ namespace _ocrRealTime.Function {
                 OnPropertyChanged(nameof(rtsppath));
             }
         }
-        public string standardcharacters {
-            get { return Properties.Settings.Default.stdChars; }
-            set {
-                Properties.Settings.Default.stdChars = value;
-                OnPropertyChanged(nameof(standardcharacters));
-            }
-        }
-        public double standardvalue {
+        public string standardvalue {
             get { return Properties.Settings.Default.stdValue; }
             set {
                 Properties.Settings.Default.stdValue = value;
                 OnPropertyChanged(nameof(standardvalue));
             }
         }
-        public string comparetype {
-            get { return Properties.Settings.Default.cmpType; }
+        public string tolerance {
+            get { return Properties.Settings.Default.tolerance; }
             set {
-                Properties.Settings.Default.cmpType = value;
-                OnPropertyChanged(nameof(comparetype));
+                Properties.Settings.Default.tolerance = value;
+                OnPropertyChanged(nameof(tolerance));
             }
         }
 
-        public double rect1width {
-            get { return Properties.Settings.Default.rect1Width; }
-            set {
-                Properties.Settings.Default.rect1Width = value;
-                OnPropertyChanged(nameof(rect1width));
-            }
-        }
-        public double rect1height {
-            get { return Properties.Settings.Default.rect1Height; }
-            set {
-                Properties.Settings.Default.rect1Height = value;
-                OnPropertyChanged(nameof(rect1height));
-            }
-        }
-        public double rect1top {
-            get { return Properties.Settings.Default.rect1Top; }
-            set {
-                Properties.Settings.Default.rect1Top = value;
-                OnPropertyChanged(nameof(rect1top));
-            }
-        }
-        public double rect1left {
-            get { return Properties.Settings.Default.rect1Left; }
-            set {
-                Properties.Settings.Default.rect1Left = value;
-                OnPropertyChanged(nameof(rect1left));
-            }
-        }
         public double scalewidth {
             get { return Properties.Settings.Default.scaleWidth; }
             set {
@@ -101,32 +67,46 @@ namespace _ocrRealTime.Function {
             }
         }
 
-        public double rect2width {
-            get { return Properties.Settings.Default.rect2Width; }
+        public double rectwidth {
+            get { return Properties.Settings.Default.rectWidth; }
             set {
-                Properties.Settings.Default.rect2Width = value;
-                OnPropertyChanged(nameof(rect2width));
+                Properties.Settings.Default.rectWidth = value;
+                OnPropertyChanged(nameof(rectwidth));
             }
         }
-        public double rect2height {
-            get { return Properties.Settings.Default.rect2Height; }
+        public double rectheight {
+            get { return Properties.Settings.Default.rectHeight; }
             set {
-                Properties.Settings.Default.rect2Height = value;
-                OnPropertyChanged(nameof(rect2height));
+                Properties.Settings.Default.rectHeight = value;
+                OnPropertyChanged(nameof(rectheight));
             }
         }
-        public double rect2top {
-            get { return Properties.Settings.Default.rect2Top; }
+        public double recttop {
+            get { return Properties.Settings.Default.rectTop; }
             set {
-                Properties.Settings.Default.rect2Top = value;
-                OnPropertyChanged(nameof(rect2top));
+                Properties.Settings.Default.rectTop = value;
+                OnPropertyChanged(nameof(recttop));
             }
         }
-        public double rect2left {
-            get { return Properties.Settings.Default.rect2Left; }
+        public double rectleft {
+            get { return Properties.Settings.Default.rectLeft; }
             set {
-                Properties.Settings.Default.rect2Left = value;
-                OnPropertyChanged(nameof(rect2left));
+                Properties.Settings.Default.rectLeft = value;
+                OnPropertyChanged(nameof(rectleft));
+            }
+        }
+        public string telnetuser {
+            get { return Properties.Settings.Default.telnetuser; }
+            set {
+                Properties.Settings.Default.telnetuser = value;
+                OnPropertyChanged(nameof(telnetuser));
+            }
+        }
+        public string telnetpass {
+            get { return Properties.Settings.Default.telnetpass; }
+            set {
+                Properties.Settings.Default.telnetpass = value;
+                OnPropertyChanged(nameof(telnetpass));
             }
         }
     }

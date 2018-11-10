@@ -8,44 +8,35 @@
     <Setting Name="rtspPath" Type="System.String" Scope="User">
       <Value Profile="(Default)">rtsp://admin:123456@192.168.1.253:43794</Value>
     </Setting>
-    <Setting Name="stdChars" Type="System.String" Scope="User">
-      <Value Profile="(Default)" />
-    </Setting>
-    <Setting Name="cmpType" Type="System.String" Scope="User">
-      <Value Profile="(Default)">Case Sensitivity</Value>
-    </Setting>
-    <Setting Name="rect1Width" Type="System.Double" Scope="User">
-      <Value Profile="(Default)">0</Value>
-    </Setting>
-    <Setting Name="rect1Height" Type="System.Double" Scope="User">
-      <Value Profile="(Default)">0</Value>
-    </Setting>
-    <Setting Name="rect1Top" Type="System.Double" Scope="User">
-      <Value Profile="(Default)">0</Value>
-    </Setting>
-    <Setting Name="rect1Left" Type="System.Double" Scope="User">
-      <Value Profile="(Default)">0</Value>
-    </Setting>
     <Setting Name="scaleWidth" Type="System.Double" Scope="User">
-      <Value Profile="(Default)">0</Value>
+      <Value Profile="(Default)">1</Value>
     </Setting>
     <Setting Name="scaleHeight" Type="System.Double" Scope="User">
-      <Value Profile="(Default)">0</Value>
+      <Value Profile="(Default)">1</Value>
     </Setting>
-    <Setting Name="rect2Width" Type="System.Double" Scope="User">
-      <Value Profile="(Default)">0</Value>
+    <Setting Name="rectWidth" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">10</Value>
     </Setting>
-    <Setting Name="rect2Height" Type="System.Double" Scope="User">
-      <Value Profile="(Default)">0</Value>
+    <Setting Name="rectHeight" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">10</Value>
     </Setting>
-    <Setting Name="rect2Top" Type="System.Double" Scope="User">
-      <Value Profile="(Default)">0</Value>
+    <Setting Name="rectTop" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">10</Value>
     </Setting>
-    <Setting Name="rect2Left" Type="System.Double" Scope="User">
-      <Value Profile="(Default)">0</Value>
+    <Setting Name="rectLeft" Type="System.Double" Scope="User">
+      <Value Profile="(Default)">10</Value>
     </Setting>
-    <Setting Name="stdValue" Type="System.Double" Scope="User">
+    <Setting Name="stdValue" Type="System.String" Scope="User">
       <Value Profile="(Default)">14</Value>
+    </Setting>
+    <Setting Name="tolerance" Type="System.String" Scope="User">
+      <Value Profile="(Default)">0.5</Value>
+    </Setting>
+    <Setting Name="telnetuser" Type="System.String" Scope="User">
+      <Value Profile="(Default)">root</Value>
+    </Setting>
+    <Setting Name="telnetpass" Type="System.String" Scope="User">
+      <Value Profile="(Default)">vnpt@123</Value>
     </Setting>
   </Settings>
 </SettingsFile>

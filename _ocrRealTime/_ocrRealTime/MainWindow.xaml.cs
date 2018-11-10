@@ -43,15 +43,21 @@ namespace _ocrRealTime {
 
         private void Window_StateChanged(object sender, EventArgs e) {
             if (this.WindowState == WindowState.Minimized) {
-                if (myGlobal.maskwindow != null) { myGlobal.maskwindow.WindowState = WindowState.Minimized; }
+                if (myGlobal.maskwindow != null) {
+                    if (!myGlobal.isVisibleMaskWindow) myGlobal.maskwindow.Visibility = Visibility.Collapsed;
+                    myGlobal.maskwindow.WindowState = WindowState.Minimized;
+                }
             }
             if (this.WindowState == WindowState.Normal) {
-                if (myGlobal.maskwindow != null) { myGlobal.maskwindow.WindowState = WindowState.Normal; }
+                if (myGlobal.maskwindow != null) {
+                    if (!myGlobal.isVisibleMaskWindow) myGlobal.maskwindow.Visibility = Visibility.Collapsed;
+                    myGlobal.maskwindow.WindowState = WindowState.Normal;
+                }
             }
         }
 
         private void Window_Deactivated(object sender, EventArgs e) {
-            if (myGlobal.isDrawingRectangle1 == false && myGlobal.isDrawingRectangle2 == false) {
+            if (myGlobal.isDrawingRectangle == false) {
                 myGlobal.maskwindow.Visibility = Visibility.Collapsed;
             }
         }

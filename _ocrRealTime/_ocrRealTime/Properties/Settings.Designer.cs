@@ -49,79 +49,7 @@ namespace _ocrRealTime.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("")]
-        public string stdChars {
-            get {
-                return ((string)(this["stdChars"]));
-            }
-            set {
-                this["stdChars"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("Case Sensitivity")]
-        public string cmpType {
-            get {
-                return ((string)(this["cmpType"]));
-            }
-            set {
-                this["cmpType"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0")]
-        public double rect1Width {
-            get {
-                return ((double)(this["rect1Width"]));
-            }
-            set {
-                this["rect1Width"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0")]
-        public double rect1Height {
-            get {
-                return ((double)(this["rect1Height"]));
-            }
-            set {
-                this["rect1Height"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0")]
-        public double rect1Top {
-            get {
-                return ((double)(this["rect1Top"]));
-            }
-            set {
-                this["rect1Top"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0")]
-        public double rect1Left {
-            get {
-                return ((double)(this["rect1Left"]));
-            }
-            set {
-                this["rect1Left"] = value;
-            }
-        }
-        
-        [global::System.Configuration.UserScopedSettingAttribute()]
-        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        [global::System.Configuration.DefaultSettingValueAttribute("1")]
         public double scaleWidth {
             get {
                 return ((double)(this["scaleWidth"]));
@@ -133,7 +61,7 @@ namespace _ocrRealTime.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0")]
+        [global::System.Configuration.DefaultSettingValueAttribute("1")]
         public double scaleHeight {
             get {
                 return ((double)(this["scaleHeight"]));
@@ -145,61 +73,97 @@ namespace _ocrRealTime.Properties {
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0")]
-        public double rect2Width {
+        [global::System.Configuration.DefaultSettingValueAttribute("10")]
+        public double rectWidth {
             get {
-                return ((double)(this["rect2Width"]));
+                return ((double)(this["rectWidth"]));
             }
             set {
-                this["rect2Width"] = value;
+                this["rectWidth"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0")]
-        public double rect2Height {
+        [global::System.Configuration.DefaultSettingValueAttribute("10")]
+        public double rectHeight {
             get {
-                return ((double)(this["rect2Height"]));
+                return ((double)(this["rectHeight"]));
             }
             set {
-                this["rect2Height"] = value;
+                this["rectHeight"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0")]
-        public double rect2Top {
+        [global::System.Configuration.DefaultSettingValueAttribute("10")]
+        public double rectTop {
             get {
-                return ((double)(this["rect2Top"]));
+                return ((double)(this["rectTop"]));
             }
             set {
-                this["rect2Top"] = value;
+                this["rectTop"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
-        [global::System.Configuration.DefaultSettingValueAttribute("0")]
-        public double rect2Left {
+        [global::System.Configuration.DefaultSettingValueAttribute("10")]
+        public double rectLeft {
             get {
-                return ((double)(this["rect2Left"]));
+                return ((double)(this["rectLeft"]));
             }
             set {
-                this["rect2Left"] = value;
+                this["rectLeft"] = value;
             }
         }
         
         [global::System.Configuration.UserScopedSettingAttribute()]
         [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
         [global::System.Configuration.DefaultSettingValueAttribute("14")]
-        public double stdValue {
+        public string stdValue {
             get {
-                return ((double)(this["stdValue"]));
+                return ((string)(this["stdValue"]));
             }
             set {
                 this["stdValue"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("0.5")]
+        public string tolerance {
+            get {
+                return ((string)(this["tolerance"]));
+            }
+            set {
+                this["tolerance"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("root")]
+        public string telnetuser {
+            get {
+                return ((string)(this["telnetuser"]));
+            }
+            set {
+                this["telnetuser"] = value;
+            }
+        }
+        
+        [global::System.Configuration.UserScopedSettingAttribute()]
+        [global::System.Diagnostics.DebuggerNonUserCodeAttribute()]
+        [global::System.Configuration.DefaultSettingValueAttribute("vnpt@123")]
+        public string telnetpass {
+            get {
+                return ((string)(this["telnetpass"]));
+            }
+            set {
+                this["telnetpass"] = value;
             }
         }
     }

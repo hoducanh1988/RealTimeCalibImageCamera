@@ -31,28 +31,16 @@ namespace _ocrRealTime {
 
         private bool _getRectInfo() {
             try {
-                if (myGlobal.isDrawingRectangle1 == true) {
-                    myGlobal.testinfo.myRect1.rectTop = _rect1.Margin.Top;
-                    myGlobal.testinfo.myRect1.rectLeft = _rect1.Margin.Left;
-                    myGlobal.testinfo.myRect1.rectWidth = _rect1.Width;
-                    myGlobal.testinfo.myRect1.rectHeight = _rect1.Height;
+                if (myGlobal.isDrawingRectangle == true) {
+                    myGlobal.testinfo.myRect.rectTop = _rect.Margin.Top;
+                    myGlobal.testinfo.myRect.rectLeft = _rect.Margin.Left;
+                    myGlobal.testinfo.myRect.rectWidth = _rect.Width;
+                    myGlobal.testinfo.myRect.rectHeight = _rect.Height;
 
-                    myGlobal.defaultsetting.rect1top = myGlobal.testinfo.myRect1.rectTop;
-                    myGlobal.defaultsetting.rect1left = myGlobal.testinfo.myRect1.rectLeft;
-                    myGlobal.defaultsetting.rect1width = myGlobal.testinfo.myRect1.rectWidth;
-                    myGlobal.defaultsetting.rect1height = myGlobal.testinfo.myRect1.rectHeight;
-                }
-
-                if (myGlobal.isDrawingRectangle2 == true) {
-                    myGlobal.testinfo.myRect2.rectTop = _rect2.Margin.Top;
-                    myGlobal.testinfo.myRect2.rectLeft = _rect2.Margin.Left;
-                    myGlobal.testinfo.myRect2.rectWidth = _rect2.Width;
-                    myGlobal.testinfo.myRect2.rectHeight = _rect2.Height;
-
-                    myGlobal.defaultsetting.rect2top = myGlobal.testinfo.myRect2.rectTop;
-                    myGlobal.defaultsetting.rect2left = myGlobal.testinfo.myRect2.rectLeft;
-                    myGlobal.defaultsetting.rect2width = myGlobal.testinfo.myRect2.rectWidth;
-                    myGlobal.defaultsetting.rect2height = myGlobal.testinfo.myRect2.rectHeight;
+                    myGlobal.defaultsetting.recttop = myGlobal.testinfo.myRect.rectTop;
+                    myGlobal.defaultsetting.rectleft = myGlobal.testinfo.myRect.rectLeft;
+                    myGlobal.defaultsetting.rectwidth = myGlobal.testinfo.myRect.rectWidth;
+                    myGlobal.defaultsetting.rectheight = myGlobal.testinfo.myRect.rectHeight;
                 }
 
                 myGlobal.defaultsetting.SaveSetting();
@@ -66,13 +54,9 @@ namespace _ocrRealTime {
         private bool _getSnapShotImageSize() {
             if (myGlobal.bitmapSnapShot == null) return false;
             try {
-                if (myGlobal.isDrawingRectangle1 == true) {
-                    myGlobal.testinfo.myImage1.width = myGlobal.bitmapSnapShot.Width;
-                    myGlobal.testinfo.myImage1.height = myGlobal.bitmapSnapShot.Height;
-                }
-                if (myGlobal.isDrawingRectangle2 == true) {
-                    myGlobal.testinfo.myImage2.width = myGlobal.bitmapSnapShot.Width;
-                    myGlobal.testinfo.myImage2.height = myGlobal.bitmapSnapShot.Height;
+                if (myGlobal.isDrawingRectangle == true) {
+                    myGlobal.testinfo.myImage.width = myGlobal.bitmapSnapShot.Width;
+                    myGlobal.testinfo.myImage.height = myGlobal.bitmapSnapShot.Height;
                 }
                 return true;
             } catch {
@@ -92,13 +76,9 @@ namespace _ocrRealTime {
 
         private bool _calculateScaleImagevsImageViewer() {
             try {
-                if (myGlobal.isDrawingRectangle1 == true) {
-                    myGlobal.testinfo.scalewidth = Math.Round(myGlobal.testinfo.myImage1.width / myGlobal.testinfo.myImageViewer.width, 2);
-                    myGlobal.testinfo.scaleheight = Math.Round(myGlobal.testinfo.myImage1.height / myGlobal.testinfo.myImageViewer.height, 2);
-                }
-                if (myGlobal.isDrawingRectangle2 == true) {
-                    myGlobal.testinfo.scalewidth = Math.Round(myGlobal.testinfo.myImage2.width / myGlobal.testinfo.myImageViewer.width, 2);
-                    myGlobal.testinfo.scaleheight = Math.Round(myGlobal.testinfo.myImage2.height / myGlobal.testinfo.myImageViewer.height, 2);
+                if (myGlobal.isDrawingRectangle == true) {
+                    myGlobal.testinfo.scalewidth = Math.Round(myGlobal.testinfo.myImage.width / myGlobal.testinfo.myImageViewer.width, 2);
+                    myGlobal.testinfo.scaleheight = Math.Round(myGlobal.testinfo.myImage.height / myGlobal.testinfo.myImageViewer.height, 2);
                 }
                 
                 myGlobal.defaultsetting.scalewidth = myGlobal.testinfo.scalewidth;
@@ -131,14 +111,9 @@ namespace _ocrRealTime {
                         _getImageViewerSize();
                         _calculateScaleImagevsImageViewer();
 
-                        Image<Gray, byte> _img1 = myBase.CropImageFromBitmap(1);
-                        if (_img1 != null) {
-                            _cropImage1.Source = myBase.Bitmap2BitmapImage(_img1.Bitmap);
-                        }
-
-                        Image<Gray, byte> _img2 = myBase.CropImageFromBitmap(2);
-                        if (_img2 != null) {
-                            _cropImage2.Source = myBase.Bitmap2BitmapImage(_img2.Bitmap);
+                        Image<Gray, byte> _img = myBase.CropImageFromBitmap();
+                        if (_img != null) {
+                            _cropImage.Source = myBase.Bitmap2BitmapImage(_img.Bitmap);
                         }
 
                     }));
@@ -159,12 +134,8 @@ namespace _ocrRealTime {
                         if (myGlobal.flags.flagshowcropimage == true) {
                             App.Current.Dispatcher.Invoke(new Action(() =>
                             {
-                                if (myGlobal.bitmapCrop1 != null) {
-                                    _cropImage1.Source = myBase.Bitmap2BitmapImage(myGlobal.bitmapCrop1);
-                                    myGlobal.flags.flagshowcropimage = false;
-                                }
-                                if (myGlobal.bitmapCrop2 != null) {
-                                    _cropImage2.Source = myBase.Bitmap2BitmapImage(myGlobal.bitmapCrop2);
+                                if (myGlobal.bitmapCrop != null) {
+                                    _cropImage.Source = myBase.Bitmap2BitmapImage(myGlobal.bitmapCrop);
                                     myGlobal.flags.flagshowcropimage = false;
                                 }
                             }));

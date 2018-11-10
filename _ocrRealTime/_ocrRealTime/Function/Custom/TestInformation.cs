@@ -20,10 +20,8 @@ namespace _ocrRealTime.Function {
         //Constructor
         public TestInformation() {
 
-            myRect1 = new RectangleInfo();
-            myImage1 = new ImageInfo<int>();
-            myRect2 = new RectangleInfo();
-            myImage2 = new ImageInfo<int>();
+            myRect = new RectangleInfo();
+            myImage = new ImageInfo<int>();
             myImageViewer = new ImageInfo<double>();
             scalewidth = 0;
             scaleheight = 0;
@@ -34,11 +32,18 @@ namespace _ocrRealTime.Function {
             windowheight = 0;
             windowbackground = Brushes.Transparent;
             windowopacity = 1;
-            statustest = "";
+            statustest = "--";
 
-            elapsedtime = "";
-            retrytime = "";
+            elapsedtime = "Elapsed time: 00:00:00    ";
+            retrytime = "0";
             systemlog = "";
+            rectInfo = "";
+
+            macaddress = "--";
+            cropImageSize = "--";
+            pixelDeviation = "--";
+            coefficient = "--";
+            testtime = "--";
 
             CameraIsOnline = false;
         }
@@ -99,10 +104,8 @@ namespace _ocrRealTime.Function {
 
 
         //Property
-        public RectangleInfo myRect1 { get; set; }
-        public ImageInfo<int> myImage1 { get; set; }
-        public RectangleInfo myRect2 { get; set; }
-        public ImageInfo<int> myImage2 { get; set; }
+        public RectangleInfo myRect { get; set; }
+        public ImageInfo<int> myImage { get; set; }
         public ImageInfo<double> myImageViewer { get; set; }
 
         public double scalewidth { get; set; }
@@ -132,22 +135,48 @@ namespace _ocrRealTime.Function {
                 OnPropertyChanged(nameof(retrytime));
             }
         }
-        string _rect1info;
-        public string rect1Info {
-            get { return _rect1info; }
+
+        string _rectinfo;
+        public string rectInfo {
+            get { return _rectinfo; }
             set {
-                _rect1info = value;
-                OnPropertyChanged(nameof(rect1Info));
+                _rectinfo = value;
+                OnPropertyChanged(nameof(rectInfo));
             }
         }
-        string _rect2info;
-        public string rect2Info {
-            get { return _rect2info; }
+        string _crImageSize;
+        public string cropImageSize {
+            get { return _crImageSize; }
             set {
-                _rect2info = value;
-                OnPropertyChanged(nameof(rect2Info));
+                _crImageSize = value;
+                OnPropertyChanged(nameof(cropImageSize));
             }
         }
+        string _pxDeviation;
+        public string pixelDeviation {
+            get { return _pxDeviation; }
+            set {
+                _pxDeviation = value;
+                OnPropertyChanged(nameof(pixelDeviation));
+            }
+        }
+        string _coefficient;
+        public string coefficient {
+            get { return _coefficient; }
+            set {
+                _coefficient = value;
+                OnPropertyChanged(nameof(coefficient));
+            }
+        }
+        string _testtime;
+        public string testtime {
+            get { return _testtime; }
+            set {
+                _testtime = value;
+                OnPropertyChanged(nameof(testtime));
+            }
+        }
+
         string _systemlog;
         public string systemlog {
             get { return _systemlog; }
@@ -171,6 +200,15 @@ namespace _ocrRealTime.Function {
                 OnPropertyChanged(nameof(CameraIsOnline));
             }
         }
+        string _mac;
+        public string macaddress {
+            get { return _mac; }
+            set {
+                _mac = value;
+                OnPropertyChanged(nameof(macaddress));
+            }
+        }
+
 
     }
 

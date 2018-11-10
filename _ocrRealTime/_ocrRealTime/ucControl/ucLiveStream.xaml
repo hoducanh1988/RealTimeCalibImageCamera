@@ -4,78 +4,222 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              xmlns:local="clr-namespace:_ocrRealTime.ucControl"
-              xmlns:webEye="clr-namespace:WebEye.Controls.Wpf.StreamPlayerControl;assembly=WebEye.Controls.Wpf.StreamPlayerControl"
+             xmlns:webEye="clr-namespace:WebEye.Controls.Wpf.StreamPlayerControl;assembly=WebEye.Controls.Wpf.StreamPlayerControl"
+             xmlns:chartingToolkit ="clr-namespace:System.Windows.Controls.DataVisualization.Charting;assembly=System.Windows.Controls.DataVisualization.Toolkit"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800">
 
-    <Border BorderBrush="Black" BorderThickness="0.5" CornerRadius="5" Background="{StaticResource colorBackground}">
+    <UserControl.Resources>
+        <Style TargetType="{x:Type TabItem}">
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="{x:Type TabItem}">
+                        <Grid>
+                            <Border  Name="Border" Margin="0,0,-4,0" BorderThickness="1,1,1,1" CornerRadius="2,12,0,0" >
+                                <ContentPresenter x:Name="ContentSite" VerticalAlignment="Center" HorizontalAlignment="Center" ContentSource="Header" Margin="12,2,12,2" RecognizesAccessKey="True"/>
+                            </Border>
+                        </Grid>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsSelected" Value="True">
+                                <Setter Property="Panel.ZIndex" Value="100"/>
+                                <Setter TargetName="Border" Property="Background" Value="#43d854" />
+                                <Setter TargetName="Border" Property="BorderThickness" Value="1,1,1,0" />
+                            </Trigger>
+                            <Trigger Property="IsSelected" Value="False">
+                                <Setter TargetName="Border" Property="Background" Value="#FFEEEEEE" />
+                            </Trigger>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="Border" Property="Background" Value="Orange" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
+
+
+    <Border BorderBrush="Black" BorderThickness="0.5" CornerRadius="0" Background="{StaticResource colorBackground}">
 
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="*"/>
+                <RowDefinition Height="7*"/>
                 <RowDefinition Height="Auto"/>
-                <RowDefinition Height="100"/>
+                <!--<RowDefinition Height="*"/>-->
             </Grid.RowDefinitions>
 
-            <webEye:StreamPlayerControl x:Name="_streamPlayerControl"/>
-            <!--StreamFailed="HandlePlayerEvent"
-                                        StreamStarted="HandlePlayerEvent"
-                                        StreamStopped="HandlePlayerEvent"-->
-
-            <Grid Grid.Row="1" Margin="5,5,5,5">
+            <Grid Grid.Row="0">
                 <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="8*"/>
-                    <ColumnDefinition Width="2*"/>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="Auto"/>
-                    <ColumnDefinition Width="Auto"/>
+                    <ColumnDefinition Width="3*"/>
+                    <ColumnDefinition Width="*"/>
                 </Grid.ColumnDefinitions>
 
-                <TextBox x:Name="_urlTextBox" Text="{Binding Path=rtsppath, UpdateSourceTrigger=PropertyChanged}" VerticalContentAlignment="Center">
-                    <TextBox.Style>
-                        <Style TargetType="TextBox">
-                            <Setter Property="Background" Value="Red"/>
-                            <Style.Triggers>
-                                <DataTrigger Binding="{Binding Path=CameraIsOnline}" Value="True">
-                                    <Setter Property="Background" Value="Lime"/>
-                                </DataTrigger>
-                            </Style.Triggers>
-                        </Style>
-                    </TextBox.Style>
-                    
-                </TextBox>
-                <TextBox x:Name="_statusLabel"
-                       Grid.Column="1"
-                         IsEnabled="False"/>
-                <!--<Button Grid.Column="2"
-                        Margin="5,0,0,0"
-                        Content=" Play "
-                        x:Name="_playButton"
-                        Click="HandlePlayButtonClick"/>-->
-                <Button Grid.Column="3"
-                        Margin="5,0,0,0"
-                        Content="Test Auto"
-                        x:Name="_testButton"
-                        Click="_testButton_Click"/>
-                <Button Grid.Column="4"
-                        Margin="5,0,0,0"
-                        Content="Stop Test"
-                        x:Name="_stopButton"
-                        Click="_stopButton_Click"
-                        />
-                <!--<Button Grid.Column="3"
-                    Content=" Stop "
-                    x:Name="_stopButton"
-                        IsEnabled="False"
-                    Click="HandleStopButtonClick"/>-->
-                <!--<Button Grid.Column="4"
-                    Content=" Image... "
-                    x:Name="_imageButton"
-                        IsEnabled="False"
-                    Click="HandleImageButtonClick"/>-->
+                <Grid Grid.Column="0" x:Name="_GridStream">
+                    <TabControl Grid.Row="1" TabStripPlacement="Bottom" SelectionChanged="TabControl_SelectionChanged">
+                        <TabControl.Resources>
+                            <Style TargetType="{x:Type TabPanel}">
+                                <Setter Property="HorizontalAlignment" Value="Center" />
+                            </Style>
+                        </TabControl.Resources>
+
+                        <TabItem x:Name="_tbLive">
+                            <TabItem.Header>
+                                <Grid Height="30">
+                                    <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="15" Text="livestream" FontWeight="SemiBold"/>
+                                </Grid>
+                            </TabItem.Header>
+                            <webEye:StreamPlayerControl x:Name="_streamPlayerControl" VerticalAlignment="Stretch" HorizontalAlignment="Stretch"/>
+                        </TabItem>
+                        <TabItem x:Name="_tbSys">
+                            <TabItem.Header>
+                                <Grid Height="30">
+                                    <TextBlock VerticalAlignment="Center" HorizontalAlignment="Center" FontSize="15" Text="systemlog" FontWeight="SemiBold"/>
+                                </Grid>
+                            </TabItem.Header>
+
+                            <ScrollViewer Margin="5,0,5,5" x:Name="_scrollViewer">
+                                <RichTextBox  Background="Transparent" BorderThickness="0" IsReadOnly="True" Block.LineHeight="1" Padding="5,5,5,5">
+                                    <FlowDocument PageHeight="180">
+                                        <Paragraph>
+                                            <Run Foreground="#050928" FontWeight="SemiBold" Text="{Binding systemlog, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
+                                        </Paragraph>
+                                    </FlowDocument>
+                                </RichTextBox>
+                            </ScrollViewer>
+                        </TabItem>
+
+                    </TabControl>
+
+
+                </Grid>
+
+                <Grid Grid.Column="1">
+                    <Border Margin="5,0,0,0" BorderBrush="Black" BorderThickness="0.2,0,0,0" CornerRadius="0" Background="{StaticResource colorBackground}">
+                        <Grid>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="Auto"/>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="70"/>
+                            </Grid.RowDefinitions>
+
+                            <Grid Grid.Row="0">
+                                <Label Content="Judged:" FontSize="15" FontWeight="SemiBold"/>
+                                <WrapPanel Margin="0,10,0,0"
+                                           VerticalAlignment="Center" HorizontalAlignment="Left">
+                                    <Label x:Name="_lblresult" 
+                                       FontSize="90" FontWeight="SemiBold"
+                                       Content="{Binding Path=statustest, UpdateSourceTrigger=PropertyChanged}"
+                                       >
+                                        <Label.Style>
+                                            <Style TargetType="Label">
+                                                <Style.Triggers>
+                                                    <DataTrigger Binding="{Binding ElementName=_lblresult, Path=Content}" Value="PASS">
+                                                        <Setter Property="Foreground" Value="Lime"/>
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding ElementName=_lblresult, Path=Content}" Value="FAIL">
+                                                        <Setter Property="Foreground" Value="Red"/>
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding ElementName=_lblresult, Path=Content}" Value="Waiting...">
+                                                        <Setter Property="Foreground" Value="{StaticResource colorTextWait}"/>
+                                                    </DataTrigger>
+                                                    <DataTrigger Binding="{Binding ElementName=_lblresult, Path=Content}" Value="--">
+                                                        <Setter Property="Foreground" Value="{StaticResource colorTextNone}"/>
+                                                    </DataTrigger>
+                                                </Style.Triggers>
+                                            </Style>
+                                        </Label.Style>
+                                    </Label>
+                                    <!--<Label VerticalAlignment="Bottom" Content="{Binding Path=retrytime, UpdateSourceTrigger=PropertyChanged}"/>-->
+                                </WrapPanel>
+
+                            </Grid>
+
+                            <Grid Grid.Row="1">
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="*"/>
+                                    <RowDefinition Height="30"/>
+                                </Grid.RowDefinitions>
+
+                                <Grid Grid.Row="0">
+
+                                    <StackPanel>
+                                        <Label Content="Statistics:" FontSize="15" FontWeight="SemiBold"/>
+                                        <WrapPanel>
+                                            <Label Content="> Mac Address:"/>
+                                            <Label Content="{Binding Path=macaddress, UpdateSourceTrigger=PropertyChanged}" FontWeight="Bold"/>
+                                        </WrapPanel>
+                                        <WrapPanel>
+                                            <Label Content="> Crop image size:"/>
+                                            <Label Content="{Binding Path=cropImageSize, UpdateSourceTrigger=PropertyChanged}"/>
+                                        </WrapPanel>
+                                        <WrapPanel>
+                                            <Label Content="> All pixel deviation:"/>
+                                            <Label Content="{Binding Path=pixelDeviation, UpdateSourceTrigger=PropertyChanged}"/>
+                                        </WrapPanel>
+                                        <WrapPanel>
+                                            <Label Content="> Coefficient:"/>
+                                            <Label FontWeight="Bold" Content="{Binding Path=coefficient, UpdateSourceTrigger=PropertyChanged}"/>
+                                        </WrapPanel>
+                                        <WrapPanel>
+                                            <Label Content="> Test time:"/>
+                                            <Label Content="{Binding Path=testtime, UpdateSourceTrigger=PropertyChanged}"/>
+                                        </WrapPanel>
+
+                                        <Label Content="Coefficient Graph:" FontSize="15" FontWeight="SemiBold"/>
+                                        <chartingToolkit:Chart Grid.Row="0"  Margin="5,0,5,0" ClipToBounds="True" x:Name="chart1" Title="{Binding Path=ChartTitle, UpdateSourceTrigger=PropertyChanged}">
+
+                                            <chartingToolkit:Chart.Axes>
+                                                <chartingToolkit:LinearAxis Minimum="{Binding Path=MinValue, UpdateSourceTrigger=PropertyChanged}" Orientation="X"></chartingToolkit:LinearAxis>
+                                                <chartingToolkit:LinearAxis Minimum="0" Maximum="20" Orientation="Y"></chartingToolkit:LinearAxis>
+                                            </chartingToolkit:Chart.Axes>
+
+                                            <chartingToolkit:Chart.LegendStyle>
+                                                <Style TargetType="Control">
+                                                    <Setter Property="Width" Value="0" />
+                                                    <Setter Property="Height" Value="0" />
+                                                </Style>
+                                            </chartingToolkit:Chart.LegendStyle>
+
+                                            <chartingToolkit:Chart.TitleStyle>
+                                                <Style TargetType="Control">
+                                                    <!--<Setter Property="Width" Value="0" />
+                                                    <Setter Property="Height" Value="0" />-->
+                                                    <Setter Property="FontSize" Value="15"/>
+                                                    <Setter Property="FontWeight" Value="SemiBold"/>
+                                                    <Setter Property="HorizontalContentAlignment" Value="Center"/>
+
+                                                </Style>
+                                            </chartingToolkit:Chart.TitleStyle>
+
+                                            <chartingToolkit:LineSeries IndependentValueBinding="{Binding Value1}" DependentValueBinding="{Binding Value2}" ItemsSource="{Binding chartData}" Background="Transparent" Cursor="Arrow"
+                                                                        VerticalAlignment="Stretch" HorizontalAlignment="Stretch">
+                                                <chartingToolkit:LineSeries.DataPointStyle>
+                                                    <Style TargetType="{x:Type chartingToolkit:LineDataPoint}">
+                                                        <Setter Property="Height" Value="0"/>
+                                                        <Setter Property="Width" Value="0" />
+                                                        <Setter Property="Background" Value="Green"/>
+                                                    </Style>
+                                                </chartingToolkit:LineSeries.DataPointStyle>
+                                            </chartingToolkit:LineSeries>
+                                        </chartingToolkit:Chart>
+                                    </StackPanel>
+
+                                </Grid>
+                                <WrapPanel Grid.Row="1">
+                                    <Label FontWeight="SemiBold" Content="{Binding Path=elapsedtime, UpdateSourceTrigger=PropertyChanged}" FontSize="15"/>
+                                </WrapPanel>
+                            </Grid>
+
+                            <Button x:Name="_btnStart" Grid.Row="2" Margin="5,0,5,0" Height="65" Content="Auto Test" FontSize="25" FontWeight="SemiBold" Foreground="White" Background="#cc821c"
+                                    Click="Button_Click"
+                                    />
+                        </Grid>
+
+                    </Border>
+                </Grid>
             </Grid>
 
-            <Grid Grid.Row="2">
+            <!--<Grid Grid.Row="2">
                 <ScrollViewer Margin="5,0,5,5" x:Name="_scrollViewer">
                     <RichTextBox  Background="Transparent" BorderThickness="0" IsReadOnly="True" Block.LineHeight="1" Padding="5,5,5,5">
                         <FlowDocument PageHeight="180">
@@ -85,9 +229,9 @@
                         </FlowDocument>
                     </RichTextBox>
                 </ScrollViewer>
-            </Grid>
-            
+            </Grid>-->
+
         </Grid>
     </Border>
-    
+
 </UserControl>

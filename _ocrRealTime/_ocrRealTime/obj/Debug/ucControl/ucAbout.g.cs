@@ -52,7 +52,7 @@ namespace _ocrRealTime.ucControl {
                 return;
             }
             _contentLoaded = true;
-            System.Uri resourceLocater = new System.Uri("/_ocrRealTime;component/uccontrol/ucabout.xaml", System.UriKind.Relative);
+            System.Uri resourceLocater = new System.Uri("/realTimeCalibSharpness_Ver1.0.0.0;component/uccontrol/ucabout.xaml", System.UriKind.Relative);
             
             #line 1 "..\..\..\ucControl\ucAbout.xaml"
             System.Windows.Application.LoadComponent(this, resourceLocater);

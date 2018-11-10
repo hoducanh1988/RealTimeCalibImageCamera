@@ -38,45 +38,29 @@ namespace _ocrRealTime.ucControl {
                 }
 
                 //Crop image
-                Image<Gray, byte> _image1 = myBase.CropImageFromBitmap(1);
-                myGlobal.bitmapCrop1 = _image1.Bitmap;
+                Image<Gray, byte> _image = myBase.CropImageFromBitmap();
+                myGlobal.bitmapCrop = _image.Bitmap;
 
-                Image<Gray, byte> _image2 = myBase.CropImageFromBitmap(2);
-                myGlobal.bitmapCrop2 = _image2.Bitmap;
 
                 myGlobal.flags.flagshowcropimage = true;
-
-                //Translate image to text
-                //string _text = _getTextFromCropImage(_image);
-                //myGlobal.testinfo.systemlog += string.Format(">>> {0}, TEXT = {1}\r\n", DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss ffff"), _text.Replace("\r","").Replace("\n","").Trim());
-
-                //Compare text with standard
-                //bool ret = myGlobal.defaultsetting.comparetype == "Case Sensitivity" ? _text.Contains(myGlobal.defaultsetting.standardcharacters) : _text.ToLower().Contains(myGlobal.defaultsetting.standardcharacters.ToLower());
-
-                //myGlobal.testinfo.statustest = ret == true ? "PASS" : "FAIL";
-                //return ret;
-
-                //Near = 0.3 m
-                //int s = _getSharpnessValue(_image1);
-                //int pixel = _image1.Width * _image1.Height;
-                //double scale = s / (pixel * 1.0);
                 string _name = myGlobal.defaultsetting.cameraip.Split('.')[3];
-                //myGlobal.testinfo.rect1Info = string.Format("Rect1, sum={0}, pixel={1}, scale={2}", s, pixel, scale);
-                //System.IO.StreamWriter st = new System.IO.StreamWriter(@"C:\Users\ANHHO\Desktop\_LOG\" + _name + "_N.csv", true);
+
+                //Far = 2.0 m
+                int s = _getSharpnessValue(_image);
+                int pixel = _image.Width * _image.Height;
+                double scale = s / (pixel * 1.0);
+
+                myGlobal.testinfo.pixelDeviation = string.Format("{0}", s);
+                myGlobal.testinfo.cropImageSize = string.Format("width={0}, height={1}, pixel={2}", _image.Width, _image.Height, pixel);
+                myGlobal.testinfo.coefficient = string.Format("{0}", Math.Round(scale, 2));
+
+                //myGlobal.testinfo.rectInfo = string.Format("sum={0}, pixel={1}, scale={2}", s, pixel, scale);
+                //var st = new System.IO.StreamWriter(@"C:\Users\ANHHO\Desktop\_LOG\" + _name + "_F.csv", true);
                 //st.WriteLine(scale.ToString());
                 //st.Dispose();
 
-                //Far = 2.0 m
-                int s = _getSharpnessValue(_image2);
-                int pixel = _image2.Width * _image2.Height;
-                double scale = s / (pixel * 1.0);
-                myGlobal.testinfo.rect2Info = string.Format("Rect2, sum={0}, pixel={1}, scale={2}", s, pixel, scale);
-                var st = new System.IO.StreamWriter(@"C:\Users\ANHHO\Desktop\_LOG\" + _name + "_F.csv", true);
-                st.WriteLine(scale.ToString());
-                st.Dispose();
-
                 //return true;
-                return (scale >= myGlobal.defaultsetting.standardvalue);
+                return (scale >= (double.Parse(myGlobal.defaultsetting.standardvalue) - double.Parse(myGlobal.defaultsetting.tolerance)));
             } catch {
                 return false;
             }

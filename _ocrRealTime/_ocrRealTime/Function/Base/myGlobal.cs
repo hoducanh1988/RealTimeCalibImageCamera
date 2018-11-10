@@ -13,10 +13,12 @@ namespace _ocrRealTime.Function {
         public static DefaultSetting defaultsetting = new DefaultSetting();
         
         public static System.Drawing.Bitmap bitmapSnapShot = null;
-        public static System.Drawing.Bitmap bitmapCrop1 = null;
-        public static System.Drawing.Bitmap bitmapCrop2 = null;
+        public static System.Drawing.Bitmap bitmapCrop = null;
 
-        public static Boolean isDrawingRectangle1 = false;
-        public static Boolean isDrawingRectangle2 = false;
+        public static Boolean isDrawingRectangle = false;
+
+        public static Boolean isCalculateStandardValue = false;
+
+        public static Boolean isVisibleMaskWindow = true;
     }
 }

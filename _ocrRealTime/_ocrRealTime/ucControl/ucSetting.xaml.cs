@@ -21,14 +21,16 @@ namespace _ocrRealTime.ucControl {
     public partial class ucSetting : UserControl {
         public ucSetting() {
             InitializeComponent();
-            this.cbbcmptype.ItemsSource = myParameter.ListCompareType;
-
             this.DataContext = myGlobal.defaultsetting;
         }
 
         private void Button_Click(object sender, RoutedEventArgs e) {
-            myGlobal.defaultsetting.SaveSetting();
-            MessageBox.Show("Success!", "Save Setting", MessageBoxButton.OK, MessageBoxImage.Information);
+            bool ret = System.Text.RegularExpressions.Regex.IsMatch(myGlobal.defaultsetting.cameraip, @"^[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}$");
+            if (ret) {
+                myGlobal.defaultsetting.SaveSetting();
+                MessageBox.Show("Success!", "Save Setting", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+            else System.Windows.MessageBox.Show("IP is not valid.", "Error", System.Windows.MessageBoxButton.OK, System.Windows.MessageBoxImage.Error);
         }
     }
 }

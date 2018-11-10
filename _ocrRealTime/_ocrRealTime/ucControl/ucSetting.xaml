@@ -16,17 +16,41 @@
 
             <ScrollViewer Grid.Row="0" Margin="5,5,5,5">
                 <StackPanel Margin="0,0,5,0">
+
                     <!--Live stream-->
-                    <Grid Height="160">
+                    <Grid Height="230">
                         <StackPanel Grid.Column="0">
-                            <Label Foreground="{StaticResource colorBorder}" FontSize="14" FontWeight="Bold" Content="SETUP LIVE STREAM:"></Label>
+                            <Label Foreground="{StaticResource colorBorder}" FontSize="14" FontWeight="Bold" Content="SETUP CAMERA INFO:"></Label>
 
                             <Label Content="IP Address Of Camera:" FontSize="13"></Label>
                             <TextBox Height="27" Background="White" FontWeight="Bold" FontSize="13" Padding="5,0,0,0"
                                      Text="{Binding Path=cameraip, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
 
-                            <Label Content="RTSP path stream of Camera:" FontSize="13"></Label>
+                            <Label Content="Telnet User:" FontSize="13"></Label>
                             <TextBox Height="27" Background="White" FontWeight="Bold" FontSize="13" Padding="5,0,0,0"
+                                     Text="{Binding Path=telnetuser, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
+
+                            <Label Content="Telnet Password:" FontSize="13"></Label>
+                            <TextBox Height="27" Background="White" FontWeight="Bold" FontSize="13" Padding="5,0,0,0"
+                                     Text="{Binding Path=telnetpass, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
+                            
+                        </StackPanel>
+                    </Grid>
+                    
+                    <!--MINUS-->
+                    <Label FontSize="15" FontWeight="Bold" Content="-"></Label>
+                    
+                    <!--Live stream-->
+                    <Grid Height="120">
+                        <StackPanel Grid.Column="0">
+                            <Label Foreground="{StaticResource colorBorder}" FontSize="14" FontWeight="Bold" Content="SETUP LIVE STREAM:"></Label>
+
+                            <!--<Label Content="IP Address Of Camera:" FontSize="13"></Label>
+                            <TextBox Height="27" Background="White" FontWeight="Bold" FontSize="13" Padding="5,0,0,0"
+                                     Text="{Binding Path=cameraip, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>-->
+
+                            <Label Content="RTSP path stream of Camera:" FontSize="13"></Label>
+                            <TextBox Height="27" IsEnabled="False" Background="White" FontWeight="Bold" FontSize="13" Padding="5,0,0,0"
                                      Text="{Binding Path=rtsppath, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
 
                         </StackPanel>
@@ -41,18 +65,12 @@
                         <StackPanel Grid.Column="0">
                             <Label Foreground="{StaticResource colorBorder}" FontSize="14" FontWeight="Bold" Content="SETUP TEST CAMERA LENS:"></Label>
 
-                            <Label Content="Standard characters:" FontSize="13"></Label>
-                            <TextBox Height="27" Background="White" FontWeight="Bold" FontSize="13" Padding="5,0,0,0"
-                                     Text="{Binding Path=standardcharacters, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
-
-                            <Label Content="Comparation string type:" FontSize="13"></Label>
-                            <ComboBox x:Name="cbbcmptype" Height="27" VerticalContentAlignment="Center" Background="White" FontSize="13" FontWeight="Bold" Padding="5,0,0,0" 
-                                      Text="{Binding Path=comparetype, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"></ComboBox>
-
                             <Label Content="Standard Value:" FontSize="13"></Label>
                             <TextBox Height="27" Background="White" FontWeight="Bold" FontSize="13" Padding="5,0,0,0"
                                      Text="{Binding Path=standardvalue, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
-
+                            <Label Content="Tolerance Value:" FontSize="13"></Label>
+                            <TextBox Height="27" Background="White" FontWeight="Bold" FontSize="13" Padding="5,0,0,0"
+                                     Text="{Binding Path=tolerance, UpdateSourceTrigger=PropertyChanged, Mode=TwoWay}"/>
                         </StackPanel>
 
                     </Grid>

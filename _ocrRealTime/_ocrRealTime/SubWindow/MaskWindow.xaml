@@ -23,33 +23,10 @@
 
     <Canvas>
 
-        <Rectangle x:Name="_rect1" Stroke="Red" StrokeThickness="4" Fill="Transparent" Visibility="Collapsed" VerticalAlignment="top" HorizontalAlignment="Left" IsHitTestVisible="False"/>
-        <Rectangle x:Name="_rect2" Stroke="Red" StrokeThickness="4" Fill="Transparent" Visibility="Collapsed" VerticalAlignment="top" HorizontalAlignment="Left" IsHitTestVisible="False"/>
-        <Image x:Name="_cropImage1" Canvas.Bottom="10" Canvas.Left="10" Height="0" Width="0" Stretch="Fill"/>
-        <Image x:Name="_cropImage2" Canvas.Bottom="10" Canvas.Left="10" Height="450" Width="550" Stretch="Fill"/>
-        <Label Content="{Binding Path=statustest, UpdateSourceTrigger=PropertyChanged}" Canvas.Bottom="30" Canvas.Right="10" FontSize="120">
-            <Label.Style>
-                <Style TargetType="Label">
-                    <Style.Triggers>
-                        <DataTrigger Binding="{Binding Path=statustest}" Value="Waiting...">
-                            <Setter Property="Foreground" Value="Yellow"/>
-                        </DataTrigger>
-                        <DataTrigger Binding="{Binding Path=statustest}" Value="PASS">
-                            <Setter Property="Foreground" Value="Lime"/>
-                        </DataTrigger>
-                        <DataTrigger Binding="{Binding Path=statustest}" Value="FAIL">
-                            <Setter Property="Foreground" Value="Red"/>
-                        </DataTrigger>
-                    </Style.Triggers>
-                </Style>
-            </Label.Style>
-        </Label>
-
-        <Label Content="{Binding Path=elapsedtime, UpdateSourceTrigger=PropertyChanged}" FontSize="22" FontWeight="SemiBold" Foreground="Lime" Canvas.Bottom="5" Canvas.Right="125"/>
-        <Label Content="{Binding Path=retrytime, UpdateSourceTrigger=PropertyChanged}" FontSize="22" FontWeight="SemiBold" Foreground="Lime" Canvas.Bottom="5" Canvas.Right="10"/>
-
-        <Label Content="{Binding Path=rect1Info, UpdateSourceTrigger=PropertyChanged}" FontSize="22" FontWeight="SemiBold" Foreground="Lime" Canvas.Top="5" Canvas.Right="5"/>
-        <Label Content="{Binding Path=rect2Info, UpdateSourceTrigger=PropertyChanged}" FontSize="22" FontWeight="SemiBold" Foreground="Lime" Canvas.Top="30" Canvas.Right="5"/>
+        <Rectangle x:Name="_rect" Stroke="Red" StrokeThickness="4" Fill="Transparent" Visibility="Collapsed" VerticalAlignment="top" HorizontalAlignment="Left" IsHitTestVisible="False"/>
+        <Image x:Name="_cropImage" Canvas.Bottom="35" Canvas.Left="1" Height="200" Width="200" Stretch="Fill"/>
+        <Label Content="{Binding Path=retrytime, UpdateSourceTrigger=PropertyChanged}" FontSize="22" FontWeight="SemiBold" Foreground="Lime" Canvas.Bottom="35" Canvas.Right="10"/>
+        <Label Visibility="Collapsed" Content="{Binding Path=rectInfo, UpdateSourceTrigger=PropertyChanged}" FontSize="22" FontWeight="SemiBold" Foreground="Lime" Canvas.Top="30" Canvas.Right="5"/>
         
     </Canvas>
 

@@ -24,15 +24,15 @@
                 <RowDefinition Height="50"/>
                 <RowDefinition Height="40"/>
                 <RowDefinition Height="*"/>
-                <RowDefinition Height="10"/>
+                <RowDefinition Height="20"/>
             </Grid.RowDefinitions>
 
             <!--Software infomation-->
             <Grid Grid.Row="0" Margin="5,0,0,0">
                 <WrapPanel HorizontalAlignment="Left">
 
-                    <Label VerticalAlignment="Center" Foreground="Black" Content=" Version beta (DEMO)"></Label>
-                    <Label VerticalAlignment="Center" Foreground="Black" Content=" Build date 02/11/2018"></Label>
+                    <Label VerticalAlignment="Center" Foreground="Black" Content=" Version 1.0.0.0"></Label>
+                    <Label VerticalAlignment="Center" Foreground="Black" Content=" Build date 08/11/2018"></Label>
                     <Label VerticalAlignment="Center" Foreground="Black" Content=" Copyright of VNPT Technology 2018"></Label>
                 </WrapPanel>
                 <WrapPanel VerticalAlignment="Center" HorizontalAlignment="Right" >
@@ -46,30 +46,28 @@
 
             <!--menu item-->
             <Grid Margin="4,25,1,0" Grid.RowSpan="2">
+                
                 <Menu Width="Auto" HorizontalAlignment="Left" Background="{StaticResource colorBackground}">
+                    
                     <MenuItem Header="File" FontWeight="Bold">
                         <MenuItem Header="Open log" Click="MenuItem_Click"/>
                         <Separator/>
                         <MenuItem Header="Exit" Click="MenuItem_Click"/>
                     </MenuItem>
+                    
                     <MenuItem Header="Edit" FontWeight="Bold">
-                        <MenuItem Header="Drawing Rect">
-                            <MenuItem Header="Rect1" Click="MenuItem_Click"/>
-                            <MenuItem Header="Rect2" Click="MenuItem_Click"/>
-                        </MenuItem>
-                        <MenuItem Header="Save Rect" Click="MenuItem_Click"/>
-                        <!--<MenuItem Header="Drawing Rectangle" Click="MenuItem_Click"/>
-                        <MenuItem Header="Save Rectangle" Click="MenuItem_Click"/>-->
-                        
-                        <!--<Separator/>-->
-                        <!--<MenuItem Header="Save Crop Image" Click="MenuItem_Click"/>-->
+                        <MenuItem x:Name="_miDraw" Header="Draw Testing Area" Click="MenuItem_Click"/>
+                        <MenuItem x:Name="_miSave" Header="Save Area" IsEnabled="False" Click="MenuItem_Click"/>
+                        <Separator/>
+                        <MenuItem x:Name="_miCal" Header="Calculate Standard" Click="MenuItem_Click"/>
                     </MenuItem>
                 </Menu>
+                
             </Grid>
 
             <!--title-->
             <Grid Grid.Row="2" Margin="5,-25,0,0" MouseDown="Grid_MouseDown">
-                <Label Content="REALTIME TESTING THE SHARPNESS OF IP CAMERA" FontWeight="SemiBold" FontSize="26"/>
+                <Label Content="Tool Support Calibration The Sharpness Of Camera" FontWeight="SemiBold" FontSize="26"/>
             </Grid>
 
             <!--content-->
@@ -109,7 +107,18 @@
 
             <!--status bar-->
             <Grid Grid.Row="4" >
-               
+                <TextBox x:Name="_urlTextBox" Text="{Binding Path=rtsppath, UpdateSourceTrigger=PropertyChanged}" VerticalContentAlignment="Center">
+                    <TextBox.Style>
+                        <Style TargetType="TextBox">
+                            <Setter Property="Background" Value="Red"/>
+                            <Style.Triggers>
+                                <DataTrigger Binding="{Binding Path=CameraIsOnline}" Value="True">
+                                    <Setter Property="Background" Value="Lime"/>
+                                </DataTrigger>
+                            </Style.Triggers>
+                        </Style>
+                    </TextBox.Style>
+                </TextBox>
             </Grid>
         </Grid>
 

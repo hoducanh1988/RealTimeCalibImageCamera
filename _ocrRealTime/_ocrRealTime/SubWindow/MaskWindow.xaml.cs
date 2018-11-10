@@ -33,7 +33,7 @@ namespace _ocrRealTime {
         }
 
         private void Window_MouseDown(object sender, MouseButtonEventArgs e) {
-            if (myGlobal.isDrawingRectangle1 == false && myGlobal.isDrawingRectangle2 == false) return;
+            if (myGlobal.isDrawingRectangle == false) return;
 
             if (e.ChangedButton == MouseButton.Left) {
                 if (isDragging == false) {
@@ -45,46 +45,31 @@ namespace _ocrRealTime {
         }
 
         private void Window_MouseMove(object sender, MouseEventArgs e) {
-            if (myGlobal.isDrawingRectangle1 == false && myGlobal.isDrawingRectangle2 == false) return;
+            if (myGlobal.isDrawingRectangle == false) return;
 
             if (isDragging) {
                 double x = e.GetPosition(this).X;
                 double y = e.GetPosition(this).Y;
 
-                if (myGlobal.isDrawingRectangle1 == true) {
-                    _rect1.Margin = new Thickness(posLeft, posTop, 0, 0);
-                    _rect1.Width = Math.Abs(x - posLeft);
-                    _rect1.Height = Math.Abs(y - posTop);
+                _rect.Margin = new Thickness(posLeft, posTop, 0, 0);
+                _rect.Width = Math.Abs(x - posLeft);
+                _rect.Height = Math.Abs(y - posTop);
 
-                    //< anzeigen >
-                    if (_rect1.Visibility != Visibility.Visible) { _rect1.Visibility = Visibility.Visible; }
-                    //</ anzeigen >
-                    return;
-                }
-                if (myGlobal.isDrawingRectangle2 == true) {
-                    _rect2.Margin = new Thickness(posLeft, posTop, 0, 0);
-                    _rect2.Width = Math.Abs(x - posLeft);
-                    _rect2.Height = Math.Abs(y - posTop);
-
-                    //< anzeigen >
-                    if (_rect2.Visibility != Visibility.Visible) { _rect2.Visibility = Visibility.Visible; }
-                    //</ anzeigen >
-                    return;
-                }
-
+                //< anzeigen >
+                if (_rect.Visibility != Visibility.Visible) { _rect.Visibility = Visibility.Visible; }
+                //</ anzeigen >
             }
         }
 
         private void Window_MouseUp(object sender, MouseButtonEventArgs e) {
-            if (myGlobal.isDrawingRectangle1 == false && myGlobal.isDrawingRectangle2 == false) return;
+            if (myGlobal.isDrawingRectangle == false) return;
 
             if (e.ChangedButton == MouseButton.Left) {
                 if (isDragging) {
                     isDragging = false;
 
                     myGlobal.bitmapSnapShot = null;
-                    _cropImage1.Source = null;
-                    _cropImage2.Source = null;
+                    _cropImage.Source = null;
 
                     _getRectInfo();
                     
@@ -95,22 +80,13 @@ namespace _ocrRealTime {
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e) {
-            if (myGlobal.defaultsetting.rect1width != 0 && myGlobal.defaultsetting.rect1height != 0) {
-                _rect1.Margin = new Thickness(myGlobal.defaultsetting.rect1left, myGlobal.defaultsetting.rect1top, 0, 0);
-                _rect1.Width = myGlobal.defaultsetting.rect1width;
-                _rect1.Height = myGlobal.defaultsetting.rect1height;
+            if (myGlobal.defaultsetting.rectwidth != 0) {
+                _rect.Margin = new Thickness(myGlobal.defaultsetting.rectleft, myGlobal.defaultsetting.recttop, 0, 0);
+                _rect.Width = myGlobal.defaultsetting.rectwidth;
+                _rect.Height = myGlobal.defaultsetting.rectheight;
 
                 //< anzeigen >
-                if (_rect1.Visibility != Visibility.Visible) { _rect1.Visibility = Visibility.Visible; }
-                //</ anzeigen >
-            }
-            if (myGlobal.defaultsetting.rect2width != 0 && myGlobal.defaultsetting.rect2height != 0) {
-                _rect2.Margin = new Thickness(myGlobal.defaultsetting.rect2left, myGlobal.defaultsetting.rect2top, 0, 0);
-                _rect2.Width = myGlobal.defaultsetting.rect2width;
-                _rect2.Height = myGlobal.defaultsetting.rect2height;
-
-                //< anzeigen >
-                if (_rect2.Visibility != Visibility.Visible) { _rect2.Visibility = Visibility.Visible; }
+                if (_rect.Visibility != Visibility.Visible) { _rect.Visibility = Visibility.Visible; }
                 //</ anzeigen >
             }
         }

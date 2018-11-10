@@ -72,64 +72,28 @@ namespace _ocrRealTime {
                         this.Close();
                         break;
                     }
-                //case "Drawing Rectangle": {
-                //        myGlobal.testinfo.windowopacity = 0.5;
-                //        myGlobal.testinfo.windowbackground = Brushes.White;
-                //        myGlobal.isDrawingRectangle = true;
-                //        break;
-                //    }
-                //case "Save Rectangle": {
-                //        myGlobal.testinfo.windowopacity = 1;
-                //        myGlobal.testinfo.windowbackground = Brushes.Transparent;
-                //        myGlobal.isDrawingRectangle = false;
-                //        break;
-                //    }
-                case "Rect1": {
+                case "Draw Testing Area": {
+                        _miDraw.IsEnabled = false;
+                        _miSave.IsEnabled = true;
                         myGlobal.testinfo.windowopacity = 0.5;
                         myGlobal.testinfo.windowbackground = Brushes.White;
-                        myGlobal.isDrawingRectangle1 = true;
-                        myGlobal.isDrawingRectangle2 = false;
+                        myGlobal.isDrawingRectangle = true;
                         break;
                     }
-                case "Rect2": {
-                        myGlobal.testinfo.windowopacity = 0.5;
-                        myGlobal.testinfo.windowbackground = Brushes.White;
-                        myGlobal.isDrawingRectangle1 = false;
-                        myGlobal.isDrawingRectangle2 = true;
-                        break;
-                    }
-                case "Save Rect": {
+                case "Save Area": {
+                        _miDraw.IsEnabled = true;
+                        _miSave.IsEnabled = false;
+                        mi.IsEnabled = true;
                         myGlobal.testinfo.windowopacity = 1;
                         myGlobal.testinfo.windowbackground = Brushes.Transparent;
-                        myGlobal.isDrawingRectangle1 = false;
-                        myGlobal.isDrawingRectangle2 = false;
+                        myGlobal.isDrawingRectangle = false;
                         break;
                     }
-
-                //case "Save Crop Image": {
-                //        Thread t = new Thread(new ThreadStart(() => {
-                //            //Snapshot image
-                //            myGlobal.bitmapSnapShot = null;
-                //            myGlobal.flags.flagGetRtspFrame = true;
-                //            while (myGlobal.bitmapSnapShot == null) {
-                //                Thread.Sleep(100);
-                //            }
-
-                //            //Crop image
-                //            Image<Bgr, byte> _image = myBase.CropImageFromBitmap(true);
-                //            myGlobal.bitmapCrop = _image.Bitmap;
-                //            myGlobal.flags.flagshowcropimage = true;
-
-                //            string _name = myGlobal.defaultsetting.cameraip.Split('.')[3];
-                //            myGlobal.bitmapCrop.Save(string.Format("C:\\Users\\ANHHO\\Desktop\\_Camera\\{0}.png", _name));
-
-                //            MessageBox.Show("OK");
-                //        }));
-                //        t.IsBackground = true;
-                //        t.Start();
-                        
-                //        break;
-                //    }
+                case "Calculate Standard": {
+                        myGlobal.isCalculateStandardValue = true;
+                        break;
+                    }
+                    
                 default: break;
             }
         }

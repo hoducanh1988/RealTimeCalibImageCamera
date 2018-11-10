@@ -94,12 +94,12 @@ namespace _ocrRealTime.Function {
         /// 
         /// </summary>
         /// <returns></returns>
-        public static  RectangleInfo ConvertRect(int _index) {
+        public static  RectangleInfo ConvertRect() {
             RectangleInfo _rect = new RectangleInfo();
-            _rect.rectWidth = _index == 1 ?  myGlobal.defaultsetting.rect1width * myGlobal.defaultsetting.scalewidth : myGlobal.defaultsetting.rect2width * myGlobal.defaultsetting.scalewidth;
-            _rect.rectLeft = _index == 1 ? myGlobal.defaultsetting.rect1left * myGlobal.defaultsetting.scalewidth : myGlobal.defaultsetting.rect2left * myGlobal.defaultsetting.scalewidth;
-            _rect.rectHeight = _index == 1? myGlobal.defaultsetting.rect1height * myGlobal.defaultsetting.scaleheight : myGlobal.defaultsetting.rect2height * myGlobal.defaultsetting.scaleheight;
-            _rect.rectTop = _index == 1? myGlobal.defaultsetting.rect1top * myGlobal.defaultsetting.scaleheight : myGlobal.defaultsetting.rect2top * myGlobal.defaultsetting.scaleheight;
+            _rect.rectWidth = myGlobal.defaultsetting.rectwidth * myGlobal.defaultsetting.scalewidth;
+            _rect.rectLeft = myGlobal.defaultsetting.rectleft * myGlobal.defaultsetting.scalewidth;
+            _rect.rectHeight = myGlobal.defaultsetting.rectheight * myGlobal.defaultsetting.scaleheight;
+            _rect.rectTop = myGlobal.defaultsetting.recttop * myGlobal.defaultsetting.scaleheight;
             
             return _rect;
         }
@@ -108,12 +108,12 @@ namespace _ocrRealTime.Function {
         /// 
         /// </summary>
         /// <returns></returns>
-        public static Image<Gray, byte> CropImageFromBitmap(int _index) {
+        public static Image<Gray, byte> CropImageFromBitmap() {
             if (myGlobal.bitmapSnapShot == null) return null;
 
             try {
                 Image<Bgr, byte> _imageRef = null;
-                RectangleInfo _rectInfo = ConvertRect(_index);
+                RectangleInfo _rectInfo = ConvertRect();
 
                 Image<Bgr, byte> imageInput = new Image<Bgr, byte>(myGlobal.bitmapSnapShot);
                 System.Drawing.Rectangle _rect = new System.Drawing.Rectangle((int)_rectInfo.rectLeft, (int)_rectInfo.rectTop, (int)_rectInfo.rectWidth, (int)_rectInfo.rectHeight);
@@ -136,12 +136,12 @@ namespace _ocrRealTime.Function {
         /// 
         /// </summary>
         /// <returns></returns>
-        public static Image<Bgr, byte> CropImageFromBitmap(int _index, bool _flag) {
+        public static Image<Bgr, byte> CropImageFromBitmap(bool _flag) {
             if (myGlobal.bitmapSnapShot == null) return null;
 
             try {
                 Image<Bgr, byte> _imageRef = null;
-                RectangleInfo _rectInfo = ConvertRect(_index);
+                RectangleInfo _rectInfo = ConvertRect();
 
                 Image<Bgr, byte> imageInput = new Image<Bgr, byte>(myGlobal.bitmapSnapShot);
                 System.Drawing.Rectangle _rect = new System.Drawing.Rectangle((int)_rectInfo.rectLeft, (int)_rectInfo.rectTop, (int)_rectInfo.rectWidth, (int)_rectInfo.rectHeight);
